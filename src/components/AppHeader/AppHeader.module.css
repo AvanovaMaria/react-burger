@@ -1,0 +1,152 @@
+.AppHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #1C1C21;
+    border: 2px solid #4C4CFF;
+    box-sizing: border-box;
+    position: absolute; 
+    width: 1920px;
+    height: 88px;
+    right: 40px;
+    left: 40px;
+    top: 40px;
+    bottom: 952px;
+    box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+}
+
+.headerLeftMenu {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    position: absolute;
+    padding: 16px 20px;
+    gap: 8px;
+    box-sizing: border-box;
+    width: 178px;
+    height: 56px;
+    border: 1px dashed #4C4CFF;
+    border-radius: 40px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    left: 320px;
+    top: 16px;
+    bottom: 16px;
+}
+
+.constrCont {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px 20px;
+    gap: 8px;
+    width: 178px;
+    height: 56px;
+    background: #1C1C21;
+    border: 1px dashed #4C4CFF;
+    border-radius: 40px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;   
+}
+
+.logoBurger {
+    width: 22px;
+    height: 22px;
+    left: 1px;
+    top: 1px;
+    background: #000000;
+}
+
+.constrButt {
+    color: #F2F2F3;
+    width: 106px;
+    height: 24px;
+    left: 0px;
+    top: 0px;
+    font-family: 'JetBrains Mono', monospace;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.orderCont {
+    composes: constrCont;
+    width: 197px;
+    order: 1;
+    color: #8585AD;
+}
+
+.logoOrder {
+    composes: logoBurger;
+}
+
+.orderButt {
+    composes: constrButt;
+    font-size: 15px;
+    width: 125px;
+    color: #8585AD;
+}
+
+.headerCentralLogo {
+    position: absolute;
+    width: 289.15px;
+    height: 40px;
+    right: 815.85px;
+    left: 815px;
+    top: 24px;
+    bottom: 24px;
+    display: flex;
+    align-items: center;
+    background: #1C1C21;
+    border: 1px dashed #4C4CFF;
+}
+
+.headerRightMenu {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px 20px;
+    gap: 8px;
+    position: absolute;
+    width: 207px;
+    height: 56px;
+    right: 320px;
+    left: 1393px;
+    top: 16px;
+    bottom: 16px;
+    background: #1C1C21;
+    border: 1px dashed #4C4CFF;
+    border-radius: 40px;
+}
+
+.logoProfile {
+    width: 18px;
+    height: 22px;
+    left: 3px;
+    top: 1px;
+}
+
+.profileButt {
+    width: 135px;
+    height: 24px;
+    left: 0px;
+    top: 0px;
+    font-family: 'JetBrains Mono', monospace;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #8585AD;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');

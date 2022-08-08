@@ -1,0 +1,37 @@
+.BurgerCard {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 270px;
+    height: 216px;
+    border: 1px dashed #4C4CFF;
+}
+
+.BurgerImage{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 240px;
+    height: 120px;
+    border: 1px dashed #4C4CFF;
+}
+
+.BurgerCount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    gap: 9px;
+}
+
+.BurgerDescription {
+    width: 272px;
+    height: 48px;
+    border: 1px dashed #4C4CFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 12px;
+    text-align: center;
+}

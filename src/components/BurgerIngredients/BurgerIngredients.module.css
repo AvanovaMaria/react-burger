@@ -1,0 +1,96 @@
+.BurgerIngredients {
+    position: absolute;
+    width: 650px;
+    height: 912px;
+    left: 300px;
+    top: 128px;
+    bottom: 40px;
+    background: #131316;
+    border: 2px solid #4C4CFF;
+}
+
+.MainText {
+    position: absolute;
+    width: 650px;
+    height: 40px;
+    left: 0px;
+    top: 40px; 
+    background: #131316;
+    border: 1px dashed #4C4CFF; 
+}
+
+.TabContainer {
+    position: absolute;
+    top: 100px;
+    width: 650px;
+}
+
+.SecondText {
+    position: absolute;
+    width: 650px;
+    height: 30px;
+    left: 0px;
+    top: 100px;
+}
+
+.Ingredients {
+    position: absolute;
+    width: 650px;
+    height: 756px;
+    left: 0px;
+    top: 156px;
+    overflow-y: scroll;
+
+    border-radius: 0px;
+}
+
+.HeadlineBun {
+    position: absolute;
+    width: 650px;
+    height: 30px;
+    left: 0px;
+    top: 40px;
+    border: 1px dashed #4C4CFF;
+    font-family: 'JetBrains Mono', monospace;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    color: #F2F2F3;
+}
+
+.BurgerCard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0px 16px;
+    gap: 24px;
+
+    position: absolute;
+    width: 500px;
+    height: 208px;
+    left: 2%;
+    top: 125px;
+}
+
+.HeadlineSause {
+    composes: HeadlineBun;
+    top: 342px;
+
+}
+
+.SauseCard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0px 16px;
+    gap: 24px;
+
+    position: absolute;
+    width: 500px;
+    height: 472px;
+    left: 2%;
+    top: 422px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');

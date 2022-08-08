@@ -1,0 +1,34 @@
+.BurgerConstructor {
+    position: absolute;
+    width: 650px;
+    height: 912px;
+    right: 300px;
+    top: 128px;
+    bottom: 40px;
+    background: #131316;
+    border: 2px solid #4C4CFF;
+    
+}
+
+.ConstructorCard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 100px;
+    gap: 10px;
+    border: 1px dashed #4C4CFF;
+}
+
+.BurgerPrice {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    justify-content: flex-end;
+    border: 1px dashed #4C4CFF;
+    margin-right: 16px;
+    margin-left: 260px;
+}
