@@ -29,7 +29,7 @@ function BurgerIngredients({ ingredients }) {
           <div className={styles.BurgerCard}>
             {ingredients.map((elem, i) => {
               if (elem.type === "bun") {
-                return <BurgerCard key={i._id} itemFood={elem} />;
+                return <BurgerCard key={elem._id} itemFood={elem} />;
               }
             })}
           </div>
@@ -37,7 +37,7 @@ function BurgerIngredients({ ingredients }) {
           <div className={styles.SauseCard}>
             {ingredients.map((elem, i) => {
               if (elem.type === "sauce") {
-                return <SauseCard key={i._id} itemFood={elem} />;
+                return <SauseCard key={elem._id} itemFood={elem} />;
               }
             })}
           </div>
@@ -45,7 +45,7 @@ function BurgerIngredients({ ingredients }) {
           <div className={styles.MainCard}>
             {ingredients.map((elem, i) => {
               if (elem.type === "main") {
-                return <MainCard key={i._id} itemFood={elem} />;
+                return <MainCard key={elem._id} itemFood={elem} />;
               }
             })}
           </div>

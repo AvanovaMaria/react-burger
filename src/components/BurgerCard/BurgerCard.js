@@ -10,7 +10,6 @@ function BurgerCard({ itemFood }) {
   return (
     <div className={styles.BurgerCard}>
       <div className={styles.BurgerImage}>
-        <Counter count={1} size="default" />
         <img src={itemFood.image} alt="yummy bun" />
       </div>
       <div className={styles.BurgerCount}>

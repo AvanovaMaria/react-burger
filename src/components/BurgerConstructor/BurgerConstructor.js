@@ -17,21 +17,21 @@ export const BurgerConstructor = ({ ingredients }) => {
       <div className={styles.BunContainerTop}>
         {ingredients.map((elem, i) => {
           if (elem._id === "60666c42cc7b410027a1a9b1") {
-            return <BunConstructorTop key={i._id} itemFood={elem} />;
+            return <BunConstructorTop key={elem._id} itemFood={elem} />;
           }
         })}
       </div>
       <div className={styles.MiddleContainer}>
         {ingredients.map((elem, i) => {
-          if (elem._id !== "60666c42cc7b410027a1a9b1") {
-            return <MiddleConstr key={i._id} itemFood={elem} />;
+          if (elem._id !== "60666c42cc7b410027a1a9b1" && elem._id !== "60666c42cc7b410027a1a9b2") {
+            return <MiddleConstr key={elem._id} itemFood={elem} />;
           }
         })}
       </div>
       <div className={styles.BunContainerBottom}>
         {ingredients.map((elem, i) => {
           if (elem._id === "60666c42cc7b410027a1a9b1") {
-            return <BunContainerBottom key={i._id} itemFood={elem} />;
+            return <BunContainerBottom key={elem._id} itemFood={elem} />;
           }
         })}
       </div>

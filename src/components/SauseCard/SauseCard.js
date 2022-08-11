@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./SauseCard.module.css";
+import PropTypes from 'prop-types';
 import {
   Counter,
   CurrencyIcon,
@@ -10,7 +11,6 @@ function SauseCard({ itemFood }) {
     <div className={styles.SauseCard}>
       <div className={styles.SauseImage}>
         <img src={itemFood.image} alt="yummy-yummy" />
-        <Counter count={1} size="default" />
       </div>
       <div className={styles.SauseCount}>
         <p className="text text_type_digits-default">{itemFood.price}</p>
@@ -21,6 +21,11 @@ function SauseCard({ itemFood }) {
       </div>
     </div>
   );
+}
+
+SauseCard.propTypes = {
+  price: PropTypes.number,
+  name: PropTypes.string
 }
 
 export default SauseCard;

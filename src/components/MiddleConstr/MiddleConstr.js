@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import styles from "./MiddleConstr.module.css";
 import {
   ConstructorElement,
@@ -17,6 +18,11 @@ function MiddleConstr({ itemFood }) {
       />
     </div>
   );
+}
+
+MiddleConstr.propTypes = {
+  name: PropTypes.string,
+  price: PropTypes.number
 }
 
 export default MiddleConstr;

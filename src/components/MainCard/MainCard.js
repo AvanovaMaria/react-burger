@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./MainCard.module.css";
+import PropTypes from 'prop-types';
 import {
   Counter,
   CurrencyIcon,
@@ -10,7 +11,6 @@ function MainCard({ itemFood }) {
     <div className={styles.MainCard}>
       <div className={styles.MainImage}>
         <img src={itemFood.image} alt="yummy-yummy" />
-        <Counter count={1} size="default" />
       </div>
       <div className={styles.MainCount}>
         <p className="text text_type_digits-default">{itemFood.price}</p>
@@ -22,5 +22,9 @@ function MainCard({ itemFood }) {
     </div>
   );
 }
+
+MainCard.propTypes = {
+  itemFood: PropTypes.object.isRequired,
+};
 
 export default MainCard;
