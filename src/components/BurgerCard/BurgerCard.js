@@ -26,7 +26,6 @@ function BurgerCard({ itemFood }) {
 
 BurgerCard.propTypes = {
   itemFood: PropTypes.object.isRequired,
-  className: PropTypes.string,
 };
 
 export default BurgerCard;
