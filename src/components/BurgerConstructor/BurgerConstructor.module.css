@@ -1,0 +1,36 @@
+.BurgerConstructor {
+  width: 600px;
+  background: #131316;
+  padding-top: 100px;
+}
+
+.BunContainerTop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.MiddleContainer {
+  height: 370px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: scroll;
+}
+
+.BunContainerBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.BurgerPrice {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-top: 40px;
+}

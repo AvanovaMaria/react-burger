@@ -1,0 +1,59 @@
+.BurgerIngredients {
+  width: 600px;
+  background: #131316;
+}
+
+.MainText {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+}
+
+.Ingredients {
+  height: 664px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-color: #8585ad;
+  scrollbar-base-color: #2f2f37;
+}
+
+.HeadlineBun {
+  font-family: "JetBrains Mono", monospace;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: #f2f2f3;
+}
+
+.BurgerCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0px 16px;
+  gap: 24px;
+}
+
+.HeadlineSause {
+  composes: HeadlineBun;
+}
+
+.SauseCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0px 16px;
+  gap: 24px;
+}
+
+.HeadlineMain {
+  composes: HeadlineSause;
+}
+
+.MainCard {
+  composes: SauseCard;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap");

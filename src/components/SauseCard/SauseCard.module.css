@@ -1,0 +1,33 @@
+.SauseCard {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.SauseImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 120px;
+}
+
+.SauseCount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  gap: 9px;
+}
+
+.SauseDescription {
+  width: 272px;
+  height: 48px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-bottom: 12px;
+  text-align: center;
+}

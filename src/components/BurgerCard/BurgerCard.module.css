@@ -1,0 +1,31 @@
+.BurgerCard {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.BurgerImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.BurgerCount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  gap: 9px;
+}
+
+.BurgerDescription {
+  width: 272px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 12px;
+  text-align: center;
+}
