@@ -1,0 +1,27 @@
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #131316;
+  width: 1280px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  background: #1C1C21;
+  width: 1280px;
+  height: 88px;
+  margin: 40px 2%;
+}
+
+.maincontent {
+  display: flex;
+  justify-content: space-between;
+  background: #131316;
+  gap: 40px;
+}

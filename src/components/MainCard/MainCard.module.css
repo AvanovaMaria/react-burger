@@ -1,17 +1,19 @@
-.BurgerCard {
+.MainCard {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
 }
 
-.BurgerImage {
+.MainImage {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 240px;
+  height: 120px;
 }
 
-.BurgerCount {
+.MainCount {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,11 +22,11 @@
   gap: 9px;
 }
 
-.BurgerDescription {
+.MainDescription {
   width: 272px;
   height: 48px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding-bottom: 12px;
   text-align: center;

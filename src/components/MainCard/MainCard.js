@@ -1,26 +1,26 @@
 import React from "react";
-import styles from "./SauseCard.module.css";
+import styles from "./MainCard.module.css";
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function SauseCard({ itemFood }) {
+function MainCard({ itemFood }) {
   return (
-    <div className={styles.SauseCard}>
-      <div className={styles.SauseImage}>
+    <div className={styles.MainCard}>
+      <div className={styles.MainImage}>
         <img src={itemFood.image} alt="yummy-yummy" />
         <Counter count={1} size="default" />
       </div>
-      <div className={styles.SauseCount}>
+      <div className={styles.MainCount}>
         <p className="text text_type_digits-default">{itemFood.price}</p>
         <CurrencyIcon type="primary" />
       </div>
-      <div className={styles.SauseDescription}>
+      <div className={styles.MainDescription}>
         <p className="text text_type_main-default">{itemFood.name}</p>
       </div>
     </div>
   );
 }
 
-export default SauseCard;
+export default MainCard;
