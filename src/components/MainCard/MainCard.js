@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styles from "./MainCard.module.css";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import {
   Counter,
   CurrencyIcon,
@@ -31,7 +31,17 @@ function MainCard({ itemFood }) {
       <div className={styles.MainDescription}>
         <p className="text text_type_main-default">{itemFood.name}</p>
       </div>
-      {modalIsOpen && <IngredientDetails onCancel={closeModalHandler} />}
+      {modalIsOpen && (
+        <IngredientDetails
+          image={itemFood.image}
+          name={itemFood.name}
+          calories={itemFood.calories}
+          proteins={itemFood.proteins}
+          fat={itemFood.fat}
+          carbohydrates={itemFood.carbohydrates}
+          onCancel={closeModalHandler}
+        />
+      )}
       {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
     </div>
   );

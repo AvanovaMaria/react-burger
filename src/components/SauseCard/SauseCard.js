@@ -31,7 +31,17 @@ function SauseCard({ itemFood }) {
       <div className={styles.SauseDescription}>
         <p className="text text_type_main-default">{itemFood.name}</p>
       </div>
-      {modalIsOpen && <IngredientDetails onCancel={closeModalHandler} />}
+      {modalIsOpen && (
+        <IngredientDetails
+          image={itemFood.image}
+          name={itemFood.name}
+          calories={itemFood.calories}
+          proteins={itemFood.proteins}
+          fat={itemFood.fat}
+          carbohydrates={itemFood.carbohydrates}
+          onCancel={closeModalHandler}
+        />
+      )}
       {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
     </div>
   );
