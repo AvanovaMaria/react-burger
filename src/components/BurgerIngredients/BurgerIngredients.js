@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerCard from "../BurgerCard/BurgerCard";
 import SauseCard from "../SauseCard/SauseCard";
 import MainCard from "../MainCard/MainCard";
+import Backdrop from "../Backdrop/Backdrop";
+import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 
 function BurgerIngredients({ ingredients }) {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  function openModalHandler({ ingredients }) {
+    setModalIsOpen(true);
+  }
+
+  function closeModalHandler() {
+    setModalIsOpen(false);
+  }
   const [current, setCurrent] = React.useState("one");
   return (
     <>
@@ -29,7 +40,13 @@ function BurgerIngredients({ ingredients }) {
           <div className={styles.BurgerCard}>
             {ingredients.map((elem, i) => {
               if (elem.type === "bun") {
-                return <BurgerCard key={elem._id} itemFood={elem} />;
+                return (
+                  <BurgerCard
+                    key={elem._id}
+                    itemFood={elem}
+                    onClick={(elem) => openModalHandler(elem._id)}
+                  />
+                );
               }
             })}
           </div>
@@ -37,7 +54,13 @@ function BurgerIngredients({ ingredients }) {
           <div className={styles.SauseCard}>
             {ingredients.map((elem, i) => {
               if (elem.type === "sauce") {
-                return <SauseCard key={elem._id} itemFood={elem} />;
+                return (
+                  <SauseCard
+                    key={elem._id}
+                    itemFood={elem}
+                    onClick={(elem) => openModalHandler(elem._id)}
+                  />
+                );
               }
             })}
           </div>
@@ -45,11 +68,19 @@ function BurgerIngredients({ ingredients }) {
           <div className={styles.MainCard}>
             {ingredients.map((elem, i) => {
               if (elem.type === "main") {
-                return <MainCard key={elem._id} itemFood={elem} />;
+                return (
+                  <MainCard
+                    key={elem._id}
+                    itemFood={elem}
+                    onClick={(elem) => openModalHandler(elem._id)}
+                  />
+                );
               }
             })}
           </div>
         </div>
+        {modalIsOpen && <IngredientDetails onCancel={closeModalHandler} />}
+        {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
       </div>
     </>
   );

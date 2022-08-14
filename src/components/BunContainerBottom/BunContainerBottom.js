@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function BunContainerBottom({ itemFood }) {
@@ -16,8 +16,7 @@ function BunContainerBottom({ itemFood }) {
 
 export default BunContainerBottom;
 
-
 BunContainerBottom.propTypes = {
   price: PropTypes.number,
-  image_mobile: PropTypes.string
-}
+  image_mobile: PropTypes.string,
+};

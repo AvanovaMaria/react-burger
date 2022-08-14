@@ -1,15 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./MainCard.module.css";
 import PropTypes from 'prop-types';
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import Backdrop from "../Backdrop/Backdrop";
+import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 
 function MainCard({ itemFood }) {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  function openModalHandler() {
+    setModalIsOpen(true);
+  }
+
+  function closeModalHandler() {
+    setModalIsOpen(false);
+  }
+
   return (
     <div className={styles.MainCard}>
-      <div className={styles.MainImage}>
+      <div className={styles.MainImage} onClick={openModalHandler}>
         <img src={itemFood.image} alt="yummy-yummy" />
       </div>
       <div className={styles.MainCount}>
@@ -19,6 +31,8 @@ function MainCard({ itemFood }) {
       <div className={styles.MainDescription}>
         <p className="text text_type_main-default">{itemFood.name}</p>
       </div>
+      {modalIsOpen && <IngredientDetails onCancel={closeModalHandler} />}
+      {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
     </div>
   );
 }
