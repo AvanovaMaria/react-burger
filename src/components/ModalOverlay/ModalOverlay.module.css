@@ -8,6 +8,6 @@
   justify-content: center;
   transition: all 0.3s ease-in-out;
   overflow: hidden;
-  z-index: 999;
+  z-index: 300;
   pointer-events: none;
 }
