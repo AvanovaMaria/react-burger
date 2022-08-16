@@ -24,7 +24,7 @@ function Modal({ text, isOpen, onCancel, children }) {
 
   return createPortal(
     <>
-      <ModalOverlay />
+      <ModalOverlay onCancel={onCancel} />
       <div className={styles.Modal} onClick={(el) => el.stopPropagation()}>
         <div className={styles.ModalHeader}>
           <span className={styles.ModalText}>{text}</span>
