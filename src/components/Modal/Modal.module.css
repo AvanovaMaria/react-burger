@@ -1,57 +1,56 @@
 .Modal {
-    position: fixed;
-    inset: 0;
-    /* inset sets all 4 values (top right bottom left) much like how we set padding, margin etc., */
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease-in-out;
-    overflow: hidden;
-    z-index: 999;
-    padding: 40px 20px 20px;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  z-index: 999;
+  padding: 40px 20px 20px;
 }
 
 .ModalContent {
-    width: 720px;
-    height: 718px;
-    background-color: #1C1C21;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border-radius: 40px;
-    padding: 40px 20px 20px;
+  width: 720px;
+  max-height: 718px;
+  background-color: #1c1c21;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 40px;
+  padding: 40px 20px 20px;
 }
 
 .ModalHeader {
-    background-color: #1C1C21;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 250px;
+  background-color: #1c1c21;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 250px;
 }
 
 .ModalText {
-    font-family: 'JetBrains Mono';
-    font-size: 36px;
-    line-height: 40px;
-    font-style: normal;
-    font-weight: 700;
+  font-family: "JetBrains Mono";
+  font-size: 36px;
+  line-height: 40px;
+  font-style: normal;
+  font-weight: 700;
 }
 
 .CloseButton {
-    background-color: #1C1C21;
-    width: 18px;
-    height: 18px;
+  background-color: #1c1c21;
+  width: 18px;
+  height: 18px;
 }
 
 .ButtonIcon {
-    width: 18px;
-    height: 18px;
+  width: 18px;
+  height: 18px;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap");

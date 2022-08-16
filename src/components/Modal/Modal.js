@@ -1,41 +1,58 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import ReactDOM, { createPortal } from "react-dom";
 import styles from "./Modal.module.css";
 import PropTypes from "prop-types";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import ModalOverlay from "../ModalOverlay/ModalOverlay";
+import { OrderDetails } from "../OrderDetails/OrderDetails";
+import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 
-function Modal(props) {
+function Modal({ text, isOpen, onCancel, children }) {
   function cancelHandler() {
-    props.onCancel();
+    onCancel();
   }
 
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-      cancelHandler();
+  useEffect(() => {
+    function closeByEscape(event) {
+      if (event.key === "Escape") {
+        onCancel();
+      }
     }
-  });
+    if (isOpen) {
+      document.addEventListener("keydown", closeByEscape);
+      return () => {
+        document.removeEventListener("keydown", closeByEscape);
+      };
+    }
+  }, [isOpen]);
 
   return createPortal(
-    <div className={styles.Modal} onClick={props.onCancel}>
-      <div
-        className={styles.ModalContent}
-        onClick={(el) => el.stopPropagation()}
-      >
-        <div className={styles.ModalHeader}>
-          <span className={styles.ModalText}>{props.text}</span>
-          <span className={styles.CloseButton} onClick={props.onCancel}>
-            <CloseIcon className={styles.ButtonIcon} type="primary" />
-          </span>
+    <>
+      <div className={styles.Modal} onClick={onCancel}>
+        <div
+          className={styles.ModalContent}
+          onClick={(el) => el.stopPropagation()}
+        >
+          <div className={styles.ModalHeader}>
+            <span className={styles.ModalText}>{text}</span>
+            <span className={styles.CloseButton} onClick={onCancel}>
+              <CloseIcon className={styles.ButtonIcon} type="primary" />
+            </span>
+          </div>
+          <div>{children}</div>
         </div>
-        <div>{props.children}</div>
       </div>
-    </div>,
+
+      <ModalOverlay onClick={onCancel} />
+    </>,
     document.getElementById("react-modals")
   );
 }
 
 Modal.propTypes = {
-  props: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+  isOpen: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };
 
 export default Modal;

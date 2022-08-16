@@ -38,25 +38,3 @@ function App() {
 
 export default App;
 
-/*
-const [productList, setProductList] = useState({
-  productData: null,
-  loading: true
-})
-
-useEffect(() => {
-  const getProductData = async () => {
-    setProductList({...productList, loading: true});
-    const res = await fetch(`url`);
-    const data = await res.json();
-    setProductList({productData: data.productData, loading: false});
-  }
-
-  getProductData();
-}, [ingredients])
-
-*/
-
-/*
-до этого было ingredients={data}
-*/

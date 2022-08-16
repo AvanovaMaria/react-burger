@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import styles from "./BurgerCard.module.css";
+import styles from "./IngredientCard.module.css";
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../Modal/Modal";
-import Backdrop from "../Backdrop/Backdrop";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 
-function BurgerCard({ itemFood }) {
+function IngredientCard({ itemFood }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   function openModalHandler() {
@@ -33,28 +32,22 @@ function BurgerCard({ itemFood }) {
         <p className="text text_type_main-default">{itemFood.name}</p>
       </div>
       {modalIsOpen && (
-        <IngredientDetails
-          image={itemFood.image}
-          name={itemFood.name}
-          calories={itemFood.calories}
-          proteins={itemFood.proteins}
-          fat={itemFood.fat}
-          carbohydrates={itemFood.carbohydrates}
-          onCancel={closeModalHandler}
-        />
+        <>
+          <Modal
+            text={"Детали ингредиента"}
+            isOpen={openModalHandler}
+            onCancel={closeModalHandler}
+          >
+            <IngredientDetails currentIndredient={itemFood} />
+          </Modal>
+        </>
       )}
-      {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
     </div>
   );
 }
 
-BurgerCard.propTypes = {
+IngredientCard.propTypes = {
   itemFood: PropTypes.object.isRequired,
 };
 
-export default BurgerCard;
-// {itemFood}
-/*
-{modalIsOpen && <IngredientDetails onCancel={closeModalHandler} />}
-        {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
-*/
+export default IngredientCard;

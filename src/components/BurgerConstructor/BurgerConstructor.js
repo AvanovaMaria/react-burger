@@ -10,7 +10,7 @@ import {
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import Backdrop from "../Backdrop/Backdrop";
+import Modal from "../Modal/Modal";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
 
 export const BurgerConstructor = ({ ingredients }) => {
@@ -62,9 +62,22 @@ export const BurgerConstructor = ({ ingredients }) => {
             Оформить заказ
           </Button>
         </div>
-        {modalIsOpen && <OrderDetails onCancel={closeModalHandler} />}
-        {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
+        {modalIsOpen && (
+          <>
+            <Modal
+              text={"Детали заказа"}
+              isOpen={openModalHandler}
+              onCancel={closeModalHandler}
+            >
+              <OrderDetails currentIndredient={ingredients} />
+            </Modal>
+          </>
+        )}
       </div>
     </div>
   );
+};
+
+BurgerConstructor.propTypes = {
+  ingredients: PropTypes.array,
 };

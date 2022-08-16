@@ -17,6 +17,5 @@ function BunContainerBottom({ itemFood }) {
 export default BunContainerBottom;
 
 BunContainerBottom.propTypes = {
-  price: PropTypes.number,
-  image_mobile: PropTypes.string,
+  itemFood: PropTypes.object.isRequired
 };

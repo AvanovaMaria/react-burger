@@ -1,22 +1,11 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import BurgerCard from "../BurgerCard/BurgerCard";
-import SauseCard from "../SauseCard/SauseCard";
-import MainCard from "../MainCard/MainCard";
-import Backdrop from "../Backdrop/Backdrop";
+import IngredientCard from "../IngredientCard/IngredientCard";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 
 function BurgerIngredients({ ingredients }) {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  function openModalHandler({ ingredients }) {
-    setModalIsOpen(true);
-  }
-
-  function closeModalHandler() {
-    setModalIsOpen(false);
-  }
   const [current, setCurrent] = React.useState("one");
   return (
     <>
@@ -37,53 +26,37 @@ function BurgerIngredients({ ingredients }) {
         </div>
         <div className={styles.Ingredients}>
           <p className={styles.HeadlineBun}>Булки</p>
-          <div className={styles.BurgerCard}>
+          <div className={styles.IngredientCard}>
             {ingredients.map((elem, i) => {
               if (elem.type === "bun") {
-                return (
-                  <BurgerCard
-                    key={elem._id}
-                    itemFood={elem}
-                    onClick={(elem) => openModalHandler(elem._id)}
-                  />
-                );
+                return <IngredientCard key={elem._id} itemFood={elem} />;
               }
             })}
           </div>
           <p className={styles.HeadlineSause}>Соусы</p>
-          <div className={styles.SauseCard}>
+          <div className={styles.IngredientCard}>
             {ingredients.map((elem, i) => {
               if (elem.type === "sauce") {
-                return (
-                  <SauseCard
-                    key={elem._id}
-                    itemFood={elem}
-                    onClick={(elem) => openModalHandler(elem._id)}
-                  />
-                );
+                return <IngredientCard key={elem._id} itemFood={elem} />;
               }
             })}
           </div>
           <p className={styles.HeadlineMain}>Начинки</p>
-          <div className={styles.MainCard}>
+          <div className={styles.IngredientCard}>
             {ingredients.map((elem, i) => {
               if (elem.type === "main") {
-                return (
-                  <MainCard
-                    key={elem._id}
-                    itemFood={elem}
-                    onClick={(elem) => openModalHandler(elem._id)}
-                  />
-                );
+                return <IngredientCard key={elem._id} itemFood={elem} />;
               }
             })}
           </div>
         </div>
-        {modalIsOpen && <IngredientDetails onCancel={closeModalHandler} />}
-        {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
       </div>
     </>
   );
 }
+
+BurgerIngredients.propTypes = {
+  ingredients: PropTypes.array,
+};
 
 export default BurgerIngredients;
