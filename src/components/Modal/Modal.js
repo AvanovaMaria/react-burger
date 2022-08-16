@@ -8,10 +8,6 @@ import { OrderDetails } from "../OrderDetails/OrderDetails";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 
 function Modal({ text, isOpen, onCancel, children }) {
-  function cancelHandler() {
-    onCancel();
-  }
-
   useEffect(() => {
     function closeByEscape(event) {
       if (event.key === "Escape") {
@@ -28,22 +24,16 @@ function Modal({ text, isOpen, onCancel, children }) {
 
   return createPortal(
     <>
-      <div className={styles.Modal} onClick={onCancel}>
-        <div
-          className={styles.ModalContent}
-          onClick={(el) => el.stopPropagation()}
-        >
-          <div className={styles.ModalHeader}>
-            <span className={styles.ModalText}>{text}</span>
-            <span className={styles.CloseButton} onClick={onCancel}>
-              <CloseIcon className={styles.ButtonIcon} type="primary" />
-            </span>
-          </div>
-          <div>{children}</div>
+      <ModalOverlay />
+      <div className={styles.Modal} onClick={(el) => el.stopPropagation()}>
+        <div className={styles.ModalHeader}>
+          <span className={styles.ModalText}>{text}</span>
+          <span className={styles.CloseButton} onClick={onCancel}>
+            <CloseIcon className={styles.ButtonIcon} type="primary" />
+          </span>
         </div>
+        <div>{children}</div>
       </div>
-
-      <ModalOverlay onClick={onCancel} />
     </>,
     document.getElementById("react-modals")
   );

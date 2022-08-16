@@ -21,8 +21,7 @@ function MiddleConstr({ itemFood }) {
 }
 
 MiddleConstr.propTypes = {
-  name: PropTypes.string,
-  price: PropTypes.number,
+  itemFood: PropTypes.object.isRequired,
 };
 
 export default MiddleConstr;

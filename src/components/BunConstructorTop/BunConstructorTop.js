@@ -16,6 +16,5 @@ function BunConstructorTop({ itemFood }) {
 export default BunConstructorTop;
 
 BunConstructorTop.propTypes = {
-  price: PropTypes.number,
-  image_mobile: PropTypes.string,
+  itemFood: PropTypes.object.isRequired,
 };

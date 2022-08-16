@@ -1,0 +1,13 @@
+.ModalOverlay {
+  position: fixed;
+  overflow: auto;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  z-index: 999;
+  pointer-events: none;
+}

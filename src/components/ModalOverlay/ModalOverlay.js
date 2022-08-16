@@ -1,10 +1,12 @@
 import React from "react";
+import styles from "./ModalOverlay.module.css";
 
-function ModalOverlay(props) {
+function ModalOverlay({ onCancel }) {
   function cancelHandler() {
-    props.onCancel();
+    onCancel();
   }
-  return <div onClick={props.onCancel} />;
+
+  return <div className={styles.ModalOverlay} onClick={onCancel}></div>;
 }
 
 export default ModalOverlay;
