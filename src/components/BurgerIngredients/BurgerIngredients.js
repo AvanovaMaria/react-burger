@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import BurgerCard from "../BurgerCard/BurgerCard";
-import SauseCard from "../SauseCard/SauseCard";
-import MainCard from "../MainCard/MainCard";
+import IngredientCard from "../IngredientCard/IngredientCard";
+import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 
 function BurgerIngredients({ ingredients }) {
   const [current, setCurrent] = React.useState("one");
   return (
-    <>
       <div className={styles.BurgerIngredients}>
         <div className={styles.MainText}>
           <p className="text text_type_main-large">Соберите бургер</p>
@@ -26,33 +25,36 @@ function BurgerIngredients({ ingredients }) {
         </div>
         <div className={styles.Ingredients}>
           <p className={styles.HeadlineBun}>Булки</p>
-          <div className={styles.BurgerCard}>
+          <div className={styles.IngredientCard}>
             {ingredients.map((elem, i) => {
               if (elem.type === "bun") {
-                return <BurgerCard key={elem._id} itemFood={elem} />;
+                return <IngredientCard key={elem._id} itemFood={elem} />;
               }
             })}
           </div>
           <p className={styles.HeadlineSause}>Соусы</p>
-          <div className={styles.SauseCard}>
+          <div className={styles.IngredientCard}>
             {ingredients.map((elem, i) => {
               if (elem.type === "sauce") {
-                return <SauseCard key={elem._id} itemFood={elem} />;
+                return <IngredientCard key={elem._id} itemFood={elem} />;
               }
             })}
           </div>
           <p className={styles.HeadlineMain}>Начинки</p>
-          <div className={styles.MainCard}>
+          <div className={styles.IngredientCard}>
             {ingredients.map((elem, i) => {
               if (elem.type === "main") {
-                return <MainCard key={elem._id} itemFood={elem} />;
+                return <IngredientCard key={elem._id} itemFood={elem} />;
               }
             })}
           </div>
         </div>
       </div>
-    </>
   );
 }
+
+BurgerIngredients.propTypes = {
+  ingredients: PropTypes.array.isRequired,
+};
 
 export default BurgerIngredients;

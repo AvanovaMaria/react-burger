@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import styles from "./MiddleConstr.module.css";
 import {
   ConstructorElement,
@@ -21,8 +21,7 @@ function MiddleConstr({ itemFood }) {
 }
 
 MiddleConstr.propTypes = {
-  name: PropTypes.string,
-  price: PropTypes.number
-}
+  itemFood: PropTypes.object.isRequired,
+};
 
 export default MiddleConstr;

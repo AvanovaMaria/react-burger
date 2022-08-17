@@ -30,7 +30,7 @@
   color: #f2f2f3;
 }
 
-.BurgerCard {
+.IngredientCard {
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 0px 16px;
@@ -41,19 +41,8 @@
   composes: HeadlineBun;
 }
 
-.SauseCard {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 0px 16px;
-  gap: 24px;
-}
-
 .HeadlineMain {
   composes: HeadlineSause;
-}
-
-.MainCard {
-  composes: SauseCard;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap");

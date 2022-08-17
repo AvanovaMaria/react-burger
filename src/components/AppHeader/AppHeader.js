@@ -9,7 +9,7 @@ import styles from "./AppHeader.module.css";
 
 export const AppHeader = () => {
   return (
-    <>
+    <header className={styles.header}>
       <div className={styles.headerLeftMenu}>
         <div className={styles.constrCont}>
           <BurgerIcon className={styles.logoBurger} type="primary" />
@@ -27,6 +27,6 @@ export const AppHeader = () => {
         <ProfileIcon className={styles.logoProfile} type="secondary" />
         <span className={styles.profileButt}>Личный кабинет</span>
       </div>
-    </>
+    </header>
   );
 };
