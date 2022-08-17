@@ -8,7 +8,6 @@ import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 function BurgerIngredients({ ingredients }) {
   const [current, setCurrent] = React.useState("one");
   return (
-    <>
       <div className={styles.BurgerIngredients}>
         <div className={styles.MainText}>
           <p className="text text_type_main-large">Соберите бургер</p>
@@ -51,7 +50,6 @@ function BurgerIngredients({ ingredients }) {
           </div>
         </div>
       </div>
-    </>
   );
 }
 

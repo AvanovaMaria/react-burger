@@ -6,7 +6,7 @@ import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-component
 
 export const OrderDetails = () => {
   return (
-    <div>
+    <>
       <div className={styles.IdentContainer}>
         <p className="text text_type_digits-large">034563</p>
         <p className="text text_type_main-medium">идентификатор заказа</p>
@@ -20,7 +20,7 @@ export const OrderDetails = () => {
           Дождитесь готовности на орбитальной станции
         </p>
       </div>
-    </div>
+    </>
   );
 };
 

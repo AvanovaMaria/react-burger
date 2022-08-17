@@ -1,7 +1,8 @@
 .Modal {
-  position: absolute;
-    left: 25%;
-    top: 30%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 720px;
   max-height: 718px;
   background-color: #1c1c21;

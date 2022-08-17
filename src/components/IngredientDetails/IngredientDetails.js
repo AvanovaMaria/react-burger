@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 export const IngredientDetails = ({ currentIndredient }) => {
   return (
-    <div>
+    <>
       <div className={styles.ImageContainer}>
         <img src={currentIndredient.image} alt="yummy-yummy" />
       </div>
@@ -30,7 +30,7 @@ export const IngredientDetails = ({ currentIndredient }) => {
           {currentIndredient.carbohydrates}
         </p>
       </div>
-    </div>
+    </>
   );
 };
 
