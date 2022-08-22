@@ -15,6 +15,7 @@ import { OrderDetails } from "../OrderDetails/OrderDetails";
 import IngredientContext from "../../contexts/IngredientContext";
 import TotalPriceContext from "../../contexts/TotalPriceContext";
 import OrderStateContext from "../../contexts/OrderStateContext";
+import { url, checkResponse } from "../../utils/baseUrl";
 
 export const BurgerConstructor = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -23,7 +24,7 @@ export const BurgerConstructor = () => {
   const [orderNumber, setOrderNumber] = useState(null);
 
   function openModalHandler() {
-    fetch("https://norma.nomoreparties.space/api/orders", {
+    fetch(`${url}/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -31,13 +32,11 @@ export const BurgerConstructor = () => {
       body: JSON.stringify({
         ingredients: ["60d3b41abdacab0026a733d1", "60d3b41abdacab0026a733d2"],
       }),
-    }).then((response) => {
-      console.log("response", response);
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      return response.json(); //отправить заказ
-    });
+    })
+      .then(checkResponse)
+      .catch((er) => {
+        alert(er.message);
+      });
     setOrderNumber(orderNumber + 1); // посчитать номер заказа
     setModalIsOpen(true);
   }
@@ -94,15 +93,13 @@ export const BurgerConstructor = () => {
           </div>
 
           {modalIsOpen && (
-            <>
-              <Modal
-                text={"Детали заказа"}
-                isOpen={openModalHandler}
-                onCancel={closeModalHandler}
-              >
-                <OrderDetails currentIndredient={data} />
-              </Modal>
-            </>
+            <Modal
+              text={"Детали заказа"}
+              isOpen={openModalHandler}
+              onCancel={closeModalHandler}
+            >
+              <OrderDetails currentIndredient={data} />
+            </Modal>
           )}
         </div>
       </OrderStateContext.Provider>
