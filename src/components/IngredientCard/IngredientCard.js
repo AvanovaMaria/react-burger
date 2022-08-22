@@ -38,7 +38,7 @@ function IngredientCard({ itemFood }) {
             isOpen={openModalHandler}
             onCancel={closeModalHandler}
           >
-            <IngredientDetails currentIndredient={itemFood} />
+            <IngredientDetails itemFood={itemFood} />
           </Modal>
         </>
       )}
