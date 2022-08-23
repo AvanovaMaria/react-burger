@@ -3,37 +3,37 @@ import styles from "./IngredientDetails.module.css";
 import Modal from "../Modal/Modal";
 import PropTypes from "prop-types";
 
-export const IngredientDetails = ({ currentIndredient }) => {
+export const IngredientDetails = ({ itemFood }) => {
   return (
     <>
       <div className={styles.ImageContainer}>
-        <img src={currentIndredient.image} alt="yummy-yummy" />
+        <img src={itemFood.image} alt="yummy-yummy" />
       </div>
       <div className={styles.NameContainer}>
-        <p className="text text_type_main-medium">{currentIndredient.name}</p>
+        <p className="text text_type_main-medium">{itemFood.name}</p>
       </div>
       <div className={styles.DescriptionContainer}>
         <p className="text text_type_main-default text_color_inactive">
           Калории, ккал <br />
-          {currentIndredient.calories}
+          {itemFood.calories}
         </p>
         <p className="text text_type_main-default text_color_inactive">
           Белки, г <br />
-          {currentIndredient.proteins}
+          {itemFood.proteins}
         </p>
         <p className="text text_type_main-default text_color_inactive">
           Жиры, г <br />
-          {currentIndredient.fat}
+          {itemFood.fat}
         </p>
         <p className="text text_type_main-default text_color_inactive">
           Углеводы, г <br />
-          {currentIndredient.carbohydrates}
+          {itemFood.carbohydrates}
         </p>
       </div>
     </>
   );
 };
 
-IngredientDetails.propTypes ={
-  currentIndredient: PropTypes.object.isRequired
-}
+IngredientDetails.propTypes = {
+  itemFood: PropTypes.object.isRequired,
+};

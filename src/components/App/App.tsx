@@ -4,20 +4,20 @@ import styles from "./App.module.css";
 import { AppHeader } from "../AppHeader/AppHeader";
 import BurgerIngredients from "..//BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "..//BurgerConstructor/BurgerConstructor";
+import { url, checkResponse } from "../../utils/baseUrl";
+
+import IngredientContext from "../../contexts/IngredientContext";
+import TotalPriceContext from "../../contexts/TotalPriceContext";
+import OrderStateContext from "../../contexts/IngredientContext";
 
 function App() {
-  const [productList, setProductList] = useState([]);
-  const url = "https://norma.nomoreparties.space/api/ingredients";
+  const [data, setData] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    fetch(url)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error("No more burgers, sorry!");
-      })
-      .then((data) => setProductList(data.data))
+    fetch(`${url}/ingredients`)
+      .then(checkResponse)
+      .then((data) => setData(data.data))
       .catch((er) => {
         alert(er.message);
       });
@@ -29,12 +29,15 @@ function App() {
         <AppHeader />
       </div>
       <div className={styles.maincontent}>
-        <BurgerIngredients ingredients={productList} />
-        <BurgerConstructor ingredients={productList} />
+        <IngredientContext.Provider value={{ data, setData }}>
+          <BurgerIngredients />
+          <TotalPriceContext.Provider value={{ totalPrice, setTotalPrice }}>
+            <BurgerConstructor />
+          </TotalPriceContext.Provider>
+        </IngredientContext.Provider>
       </div>
     </div>
   );
 }
 
 export default App;
-

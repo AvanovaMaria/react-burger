@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./OrderDetails.module.css";
 import Modal from "../Modal/Modal";
 import PropTypes from "prop-types";
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import IngredientContext from "../../contexts/IngredientContext";
+import OrderStateContext from "../../contexts/OrderStateContext";
 
 export const OrderDetails = () => {
+  const { productList, setProductList } = useContext(IngredientContext);
+  const { orderNumber, setOrderNumber } = useContext(OrderStateContext);
   return (
     <>
       <div className={styles.IdentContainer}>
-        <p className="text text_type_digits-large">034563</p>
+        <p className="text text_type_digits-large">{orderNumber}</p>
         <p className="text text_type_main-medium">идентификатор заказа</p>
       </div>
       <div className={styles.IconContainer}>
