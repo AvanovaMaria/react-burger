@@ -12,15 +12,17 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../Modal/Modal";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
-import IngredientContext from "../../contexts/IngredientContext";
+import { url, checkResponse, getIngredients } from "../../utils/baseUrl";
+import { chooseItemFoods } from '../../services/actions/chooseIngredients';
+import { useDispatch, useSelector } from 'react-redux';
+
 import TotalPriceContext from "../../contexts/TotalPriceContext";
 import OrderStateContext from "../../contexts/OrderStateContext";
-import { url, checkResponse } from "../../utils/baseUrl";
+
 
 export const BurgerConstructor = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { data, setData } = useContext(IngredientContext);
-  const { totalPrice, setTotalPrice } = useContext(TotalPriceContext);
+  
   const [orderNumber, setOrderNumber] = useState(null);
 
   function openModalHandler() {
@@ -45,23 +47,38 @@ export const BurgerConstructor = () => {
     setModalIsOpen(false);
   }
 
+  const dispatch = useDispatch();
+
+useEffect(
+  () => {
+    dispatch(chooseItemFoods());
+  },
+  [dispatch]
+);
+
+const {chosenIngredients} = useSelector(
+  state => state.chosenData
+)
+
+/*
   useEffect(() => {
     let total = 0;
-    data.map((item) => (total += item.price));
+    ingredients.map((item) => (total += item.price));
     setTotalPrice(total);
-  }, [data, setTotalPrice]);
+  }, [ingredients, setTotalPrice]);
+  */
 
   return (
     <div className={styles.BurgerConstructor}>
       <div className={styles.BunContainerTop}>
-        {data.map((elem, i) => {
+        {chosenIngredients.map((elem, i) => {
           if (elem._id === "60d3b41abdacab0026a733c6") {
             return <BunConstructorTop key={elem._id} itemFood={elem} />;
           }
         })}
       </div>
       <div className={styles.MiddleContainer}>
-        {data.map((elem, i) => {
+        {chosenIngredients.map((elem, i) => {
           if (
             elem._id !== "60d3b41abdacab0026a733c6" &&
             elem._id !== "60d3b41abdacab0026a733c7"
@@ -71,15 +88,15 @@ export const BurgerConstructor = () => {
         })}
       </div>
       <div className={styles.BunContainerBottom}>
-        {data.map((elem, i) => {
+        {chosenIngredients.map((elem, i) => {
           if (elem._id === "60d3b41abdacab0026a733c6") {
             return <BunContainerBottom key={elem._id} itemFood={elem} />;
           }
         })}
       </div>
-      <OrderStateContext.Provider value={{ orderNumber, setOrderNumber }}>
+      
         <div className={styles.BurgerPrice}>
-          <p className="text text_type_digits-medium">{totalPrice}</p>
+          <p className="text text_type_digits-medium">18730</p>
           <CurrencyIcon type="primary" />
 
           <div style={{ overflow: "hidden" }}>
@@ -98,11 +115,11 @@ export const BurgerConstructor = () => {
               isOpen={openModalHandler}
               onCancel={closeModalHandler}
             >
-              <OrderDetails currentIndredient={data} />
+              <OrderDetails currentIndredient={chosenIngredients} />
             </Modal>
           )}
         </div>
-      </OrderStateContext.Provider>
+      
     </div>
   );
 };

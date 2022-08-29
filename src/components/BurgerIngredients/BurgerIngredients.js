@@ -1,55 +1,83 @@
-import React, { useState, useContext } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useMemo } from "react";
 import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import IngredientCard from "../IngredientCard/IngredientCard";
-import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
-import IngredientContext from "../../contexts/IngredientContext";
+import { useDispatch, useSelector } from 'react-redux';
+import { getItemFoods } from '../../services/actions/getIngredients';
+import { IngredientsCategory } from "../IngredientsCategory/IngredientsCategory";
+
+
 
 function BurgerIngredients() {
-  const { data, setData } = useContext(IngredientContext);
-  const [current, setCurrent] = React.useState("one");
+  const dispatch = useDispatch();
+
+useEffect(
+  () => {
+    dispatch(getItemFoods());
+  },
+  [dispatch]
+);
+
+const {ingredients} = useSelector(
+  state => state.data
+)
+
+  const [current, setCurrent] = React.useState("bun");
+
+  const onTabClick = (tab) => {
+    setCurrent(tab);
+    const element = document.getElementById(tab);
+    if (element) element.scrollIntoView({behavior: "smooth"});
+  }
+
+  const buns = useMemo(
+    () => ingredients.filter((item) => item.type === "bun"),
+    [ingredients]
+  );
+
+  const sauces = useMemo(
+    () => ingredients.filter((item) => item.type === "sauce"),
+    [ingredients]
+  );
+
+  const mains = useMemo(
+    () => ingredients.filter((item) => item.type === "main"),
+    [ingredients]
+  );
+
+
   return (
     <div className={styles.BurgerIngredients}>
       <div className={styles.MainText}>
         <p className="text text_type_main-large">Соберите бургер</p>
       </div>
-      <div className={styles.TabContainer} style={{ display: "flex" }}>
-        <Tab value="one" active={current === "one"} onClick={setCurrent}>
+      <div className={styles.TabContainer}>
+        <Tab value="bun" active={current === "bun"} onClick={onTabClick}>
           Булки
         </Tab>
-        <Tab value="two" active={current === "two"} onClick={setCurrent}>
+        <Tab value="sauce" active={current === "sauce"} onClick={onTabClick}>
           Соусы
         </Tab>
-        <Tab value="three" active={current === "three"} onClick={setCurrent}>
+        <Tab value="main" active={current === "main"} onClick={onTabClick}>
           Начинки
         </Tab>
       </div>
       <div className={styles.Ingredients}>
-        <p className={styles.HeadlineBun}>Булки</p>
-        <div className={styles.IngredientCard}>
-          {data.map((elem, i) => {
-            if (elem.type === "bun") {
-              return <IngredientCard key={elem._id} itemFood={elem} />;
-            }
-          })}
-        </div>
-        <p className={styles.HeadlineSause}>Соусы</p>
-        <div className={styles.IngredientCard}>
-          {data.map((elem, i) => {
-            if (elem.type === "sauce") {
-              return <IngredientCard key={elem._id} itemFood={elem} />;
-            }
-          })}
-        </div>
-        <p className={styles.HeadlineMain}>Начинки</p>
-        <div className={styles.IngredientCard}>
-          {data.map((elem, i) => {
-            if (elem.type === "main") {
-              return <IngredientCard key={elem._id} itemFood={elem} />;
-            }
-          })}
-        </div>
+      <IngredientsCategory
+      title="Булки"
+      titleId="bun"
+      ingredients={buns}
+       />
+       <IngredientsCategory
+      title="Соусы"
+      titleId="sauce"
+      ingredients={sauces}
+       />
+       <IngredientsCategory
+      title="Начинки"
+      titleId="main"
+      ingredients={mains}
+       />
+
       </div>
     </div>
   );
