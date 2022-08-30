@@ -29,30 +29,24 @@ function IngredientCard({ itemFood }) {
     })
   }
 
-  const takeIngr = () => {
-    dispatch(openModalHandler({itemFood}))
-  }
-
-  const modalIsOpen = useSelector(
-    state => state.showModal.isOpen
-  )
+  const { isOpen } = useSelector((state) => state.showModal);
 
   return (
-    <article className={styles.BurgerCard}>
+    <article className={styles.BurgerCard} onClick={openModalHandler}>
       <Counter count={1} />
         <img src={image} alt="yummy bun" />
       <div className={styles.BurgerCount}>
         <p className="text text_type_digits-default">{price}</p>
         <CurrencyIcon type="primary" />
       </div>
-      <div className={styles.BurgerDescription} onClick={takeIngr}>
+      <div className={styles.BurgerDescription}>
         <p className="text text_type_main-default">{name}</p>
       </div>
-      {modalIsOpen && (
+      {isOpen && (
         <>
           <Modal
             text={"Детали ингредиента"}
-            isOpen={openModalHandler}
+            isOpen={isOpen}
             onCancel={closeModalHandler}
           >
             <IngredientDetails ingredient={itemFood} />

@@ -5,7 +5,7 @@ import {
 
 const initialModalState = {
     isOpen: false,
-    ingredient: false
+    ingredient: {}
 }
 
 export const modalStore = (state = initialModalState, action) => {

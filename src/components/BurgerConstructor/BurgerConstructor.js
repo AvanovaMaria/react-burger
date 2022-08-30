@@ -12,42 +12,31 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../Modal/Modal";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
-import { url, checkResponse, getIngredients } from "../../utils/baseUrl";
 import { chooseItemFoods } from '../../services/actions/chooseIngredients';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  OPEN_ORDER_MODAL,
+  CLOSE_ORDER_MODAL,
+} from '../../services/actions/orderModal';
+import {getOrderNumber} from '../../services/actions/orderModal';
 
-import TotalPriceContext from "../../contexts/TotalPriceContext";
-import OrderStateContext from "../../contexts/OrderStateContext";
 
 
 export const BurgerConstructor = () => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  
-  const [orderNumber, setOrderNumber] = useState(null);
-
+  const dispatch = useDispatch();
+/*
   function openModalHandler() {
-    fetch(`${url}/orders`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify({
-        ingredients: ["60d3b41abdacab0026a733d1", "60d3b41abdacab0026a733d2"],
-      }),
-    })
-      .then(checkResponse)
-      .catch((er) => {
-        alert(er.message);
-      });
-    setOrderNumber(orderNumber + 1); // посчитать номер заказа
-    setModalIsOpen(true);
+      dispatch({
+        type: OPEN_ORDER_MODAL,
+      })
   }
+  */
 
   function closeModalHandler() {
-    setModalIsOpen(false);
+    dispatch({
+      type: CLOSE_ORDER_MODAL,
+    })
   }
-
-  const dispatch = useDispatch();
 
 useEffect(
   () => {
@@ -60,13 +49,10 @@ const {chosenIngredients} = useSelector(
   state => state.chosenData
 )
 
-/*
-  useEffect(() => {
-    let total = 0;
-    ingredients.map((item) => (total += item.price));
-    setTotalPrice(total);
-  }, [ingredients, setTotalPrice]);
-  */
+const {isOpen, orderNumber} = useSelector(state => ({
+  isOpen: state.showOrderModal.isOpen,
+  orderNumber: state.showOrderModal.orderNumber
+}));
 
   return (
     <div className={styles.BurgerConstructor}>
@@ -103,19 +89,19 @@ const {chosenIngredients} = useSelector(
             <Button
               type="primary"
               size="large"
-              onClick={() => openModalHandler()}
+              onClick={dispatch(getOrderNumber)}
             >
               Оформить заказ
             </Button>
           </div>
 
-          {modalIsOpen && (
+          {isOpen && (
             <Modal
               text={"Детали заказа"}
-              isOpen={openModalHandler}
+              isOpen={isOpen}
               onCancel={closeModalHandler}
             >
-              <OrderDetails currentIndredient={chosenIngredients} />
+              <OrderDetails orderNumber={orderNumber} />
             </Modal>
           )}
         </div>
@@ -123,3 +109,25 @@ const {chosenIngredients} = useSelector(
     </div>
   );
 };
+
+/*
+fetch(`${url}/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({
+        ingredients: ["60d3b41abdacab0026a733d1", "60d3b41abdacab0026a733d2"],
+      }),
+    })
+      .then(checkResponse)
+      .catch((er) => {
+        alert(er.message);
+      });
+      
+      useEffect(() => {
+    let total = 0;
+    ingredients.map((item) => (total += item.price));
+    setTotalPrice(total);
+  }, [ingredients, setTotalPrice]);
+*/

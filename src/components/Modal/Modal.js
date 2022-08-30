@@ -40,7 +40,6 @@ function Modal({ text, isOpen, onCancel, children }) {
 
 Modal.propTypes = {
   text: PropTypes.string.isRequired,
-  isOpen: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
 };
 

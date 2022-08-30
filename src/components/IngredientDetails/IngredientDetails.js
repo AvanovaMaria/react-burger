@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from 'react-redux';
 import { getItemFoods } from '../../services/actions/getIngredients';
 
-export const IngredientDetails = ({ingredient}) => {
+export const IngredientDetails = () => {
+
+  const { ingredient } = useSelector((store) => store.showModal);
 
   return (
     <>
