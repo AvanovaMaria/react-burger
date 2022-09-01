@@ -15,8 +15,7 @@ import { OrderDetails } from "../OrderDetails/OrderDetails";
 import { chooseItemFoods } from '../../services/actions/chooseIngredients';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  OPEN_ORDER_MODAL,
-  CLOSE_ORDER_MODAL,
+  CLOSE_ORDER_MODAL
 } from '../../services/actions/orderModal';
 import {getOrderNumber} from '../../services/actions/orderModal';
 
@@ -24,13 +23,6 @@ import {getOrderNumber} from '../../services/actions/orderModal';
 
 export const BurgerConstructor = () => {
   const dispatch = useDispatch();
-/*
-  function openModalHandler() {
-      dispatch({
-        type: OPEN_ORDER_MODAL,
-      })
-  }
-  */
 
   function closeModalHandler() {
     dispatch({
@@ -53,6 +45,7 @@ const {isOpen, orderNumber} = useSelector(state => ({
   isOpen: state.showOrderModal.isOpen,
   orderNumber: state.showOrderModal.orderNumber
 }));
+console.log(orderNumber);
 
   return (
     <div className={styles.BurgerConstructor}>
@@ -89,7 +82,7 @@ const {isOpen, orderNumber} = useSelector(state => ({
             <Button
               type="primary"
               size="large"
-              onClick={dispatch(getOrderNumber)}
+              onClick={() => dispatch(getOrderNumber())}
             >
               Оформить заказ
             </Button>
@@ -101,7 +94,7 @@ const {isOpen, orderNumber} = useSelector(state => ({
               isOpen={isOpen}
               onCancel={closeModalHandler}
             >
-              <OrderDetails orderNumber={orderNumber} />
+              <OrderDetails />
             </Modal>
           )}
         </div>
