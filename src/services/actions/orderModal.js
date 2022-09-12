@@ -12,8 +12,9 @@ export function getOrderNumber() {
     makeOrder().then((res) => {
       dispatch({
         type: SET_ORDER_NUMBER,
-        orderNumber: res.data,
+        orderNumber: res,
       });
-    });
+    })
+    .catch(err => err.message)
   };
 }

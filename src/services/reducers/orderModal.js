@@ -7,7 +7,7 @@ import {
 const initialOrderState = {
     isOpen: false,
 
-    orderNumber: {},
+    orderNumber: [],
     orderNumberRequest: false,
     orderNumberFailed: false
 }
@@ -25,7 +25,7 @@ export const modalOrder = (state = initialOrderState, action) => {
         case SET_ORDER_NUMBER: {
             return {
                 ...state,
-                orderNumber: action.data,
+                orderNumber: action.orderNumber,
             }
         }
         case CLOSE_ORDER_MODAL: {

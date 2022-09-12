@@ -8,7 +8,8 @@ import {
 import Modal from "../Modal/Modal";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 import { useDispatch, useSelector } from "react-redux";
-import {OPEN_MODAL, CLOSE_MODAL} from '../../services/actions/modal';
+import { OPEN_MODAL, CLOSE_MODAL } from "../../services/actions/modal";
+import { useDrag } from 'react-dnd';
 
 function IngredientCard({ itemFood }) {
   const { _id, image, price, name } = itemFood;
@@ -19,22 +20,29 @@ function IngredientCard({ itemFood }) {
   const openModalHandler = () => {
     dispatch({
       type: OPEN_MODAL,
-      payload: itemFood
-    })
-  }
+      payload: itemFood,
+    });
+  };
 
   const closeModalHandler = () => {
     dispatch({
-      type: CLOSE_MODAL
-    })
-  }
+      type: CLOSE_MODAL,
+    });
+  };
 
   const { isOpen } = useSelector((state) => state.showModal);
 
+const [{opacity}, dragRef] = useDrag({
+  type: 'ingredient',
+  item: { _id },
+  collect: monitor => ({
+    opacity: monitor.isDragging() ? 0.5 : 1
+  })
+});
+
   return (
-    <article className={styles.BurgerCard} onClick={openModalHandler}>
-      <Counter count={1} />
-        <img src={image} alt="yummy bun" />
+    <article ref={dragRef} className={styles.BurgerCard} onClick={openModalHandler} style={{ opacity }}>
+      <img src={image} alt="yummy bun" />
       <div className={styles.BurgerCount}>
         <p className="text text_type_digits-default">{price}</p>
         <CurrencyIcon type="primary" />

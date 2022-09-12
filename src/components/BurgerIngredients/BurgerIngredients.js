@@ -1,33 +1,46 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from 'react-redux';
-import { getItemFoods } from '../../services/actions/getIngredients';
+import { useInView } from "react-intersection-observer";
+import { useDispatch, useSelector } from "react-redux";
+import { getItemFoods } from "../../services/actions/getIngredients";
 import { IngredientsCategory } from "../IngredientsCategory/IngredientsCategory";
-
-
 
 function BurgerIngredients() {
   const dispatch = useDispatch();
 
-useEffect(
-  () => {
+  useEffect(() => {
     dispatch(getItemFoods());
-  },
-  [dispatch]
-);
+  }, [dispatch]);
 
-const {ingredients} = useSelector(
-  state => state.data
-)
+  const { ingredients } = useSelector((state) => state.data);
 
-  const [current, setCurrent] = React.useState("bun");
+  const [current, setCurrent] = useState("bun");
+  const [bunsRef, inViewFirst] = useInView({
+    threshold: 0,
+  });
+  const [saucesRef, inViewSecond] = useInView({
+    threshold: 0,
+  });
+  const [mainsRef, inViewThird] = useInView({
+    threshold: 0,
+  });
+
+  useEffect(() => {
+    if (inViewFirst) {
+      setCurrent("buns");
+    } else if (inViewSecond) {
+      setCurrent("sauces");
+    } else if (inViewThird) {
+      setCurrent("mains");
+    }
+  }, [inViewFirst, inViewSecond, inViewThird]);
 
   const onTabClick = (tab) => {
     setCurrent(tab);
     const element = document.getElementById(tab);
-    if (element) element.scrollIntoView({behavior: "smooth"});
-  }
+    if (element) element.scrollIntoView({ behavior: "smooth" });
+  };
 
   const buns = useMemo(
     () => ingredients.filter((item) => item.type === "bun"),
@@ -43,7 +56,6 @@ const {ingredients} = useSelector(
     () => ingredients.filter((item) => item.type === "main"),
     [ingredients]
   );
-
 
   return (
     <div className={styles.BurgerIngredients}>
@@ -62,22 +74,24 @@ const {ingredients} = useSelector(
         </Tab>
       </div>
       <div className={styles.Ingredients}>
-      <IngredientsCategory
-      title="Булки"
-      titleId="bun"
-      ingredients={buns}
-       />
-       <IngredientsCategory
-      title="Соусы"
-      titleId="sauce"
-      ingredients={sauces}
-       />
-       <IngredientsCategory
-      title="Начинки"
-      titleId="main"
-      ingredients={mains}
-       />
-
+        <IngredientsCategory
+          title="Булки"
+          titleId="bun"
+          ingredients={buns}
+          ref={bunsRef}
+        />
+        <IngredientsCategory
+          title="Соусы"
+          titleId="sauce"
+          ingredients={sauces}
+          ref={saucesRef}
+        />
+        <IngredientsCategory
+          title="Начинки"
+          titleId="main"
+          ingredients={mains}
+          ref={mainsRef}
+        />
       </div>
     </div>
   );

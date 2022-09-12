@@ -6,11 +6,12 @@ import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-component
 import { useDispatch, useSelector } from 'react-redux';
 
 export const OrderDetails = () => {
+  const orderNumber = useSelector(state => state.showOrderModal.orderNumber)
   
   return (
     <>
       <div className={styles.IdentContainer}>
-        <p className="text text_type_digits-large"></p>
+        <p className="text text_type_digits-large">{orderNumber}</p>
         <p className="text text_type_main-medium">идентификатор заказа</p>
       </div>
       <div className={styles.IconContainer}>
