@@ -1,0 +1,22 @@
+.BunContainerTop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .MiddleContainer {
+    height: 370px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: scroll;
+  }
+  
+  .BunContainerBottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 16px;
+  }
+  

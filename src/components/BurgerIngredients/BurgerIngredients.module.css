@@ -11,6 +11,10 @@
   line-height: 40px;
 }
 
+.TabContainer {
+  display: flex;
+}
+
 .Ingredients {
   height: 664px;
   overflow-y: scroll;
@@ -19,16 +23,6 @@
   scrollbar-base-color: #2f2f37;
 }
 
-.HeadlineBun {
-  font-family: "JetBrains Mono", monospace;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 30px;
-  display: flex;
-  align-items: center;
-  color: #f2f2f3;
-}
 
 .IngredientCard {
   display: grid;
@@ -37,12 +31,6 @@
   gap: 24px;
 }
 
-.HeadlineSause {
-  composes: HeadlineBun;
-}
 
-.HeadlineMain {
-  composes: HeadlineSause;
-}
 
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap");

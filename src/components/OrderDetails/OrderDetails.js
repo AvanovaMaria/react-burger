@@ -3,12 +3,11 @@ import styles from "./OrderDetails.module.css";
 import Modal from "../Modal/Modal";
 import PropTypes from "prop-types";
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import IngredientContext from "../../contexts/IngredientContext";
-import OrderStateContext from "../../contexts/OrderStateContext";
+import { useDispatch, useSelector } from 'react-redux';
 
 export const OrderDetails = () => {
-  const { productList, setProductList } = useContext(IngredientContext);
-  const { orderNumber, setOrderNumber } = useContext(OrderStateContext);
+  const orderNumber = useSelector(state => state.showOrderModal.orderNumber)
+  
   return (
     <>
       <div className={styles.IdentContainer}>

@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
-import BunConstructorTop from "../BunConstructorTop/BunConstructorTop";
-import MiddleConstr from "../MiddleConstr/MiddleConstr";
-import BunContainerBottom from "../BunContainerBottom/BunContainerBottom";
+import { ConstructorIngredientsList } from "../ConstructorIngredientsList/ConstructorIngredientsList";
 import styles from "./BurgerConstructor.module.css";
 import {
   ConstructorElement,
@@ -11,98 +8,154 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../Modal/Modal";
+import MiddleConstr from '../MiddleConstr/MiddleConstr';
 import { OrderDetails } from "../OrderDetails/OrderDetails";
-import IngredientContext from "../../contexts/IngredientContext";
-import TotalPriceContext from "../../contexts/TotalPriceContext";
-import OrderStateContext from "../../contexts/OrderStateContext";
-import { url, checkResponse } from "../../utils/baseUrl";
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  CLOSE_ORDER_MODAL
+} from '../../services/actions/orderModal';
+import { makeOrder } from "../../utils/baseUrl";
+import {getOrderNumber} from '../../services/actions/orderModal';
+import { useDrop, useDrag } from 'react-dnd';
+import {addToConstructor} from '../../services/actions/constructor';
+
 
 export const BurgerConstructor = () => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { data, setData } = useContext(IngredientContext);
-  const { totalPrice, setTotalPrice } = useContext(TotalPriceContext);
-  const [orderNumber, setOrderNumber] = useState(null);
-
-  function openModalHandler() {
-    fetch(`${url}/orders`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify({
-        ingredients: ["60d3b41abdacab0026a733d1", "60d3b41abdacab0026a733d2"],
-      }),
-    })
-      .then(checkResponse)
-      .catch((er) => {
-        alert(er.message);
-      });
-    setOrderNumber(orderNumber + 1); // посчитать номер заказа
-    setModalIsOpen(true);
-  }
+  const dispatch = useDispatch();
+  const {isOpen} = useSelector(state => ({
+    isOpen: state.showOrderModal.isOpen}));
+    const {chosenIngredients} = useSelector(
+      state => state.chosenData
+    );
+    const orderedItems = useSelector((state) => state.orderedItems)
 
   function closeModalHandler() {
-    setModalIsOpen(false);
+    dispatch({
+      type: CLOSE_ORDER_MODAL,
+    })
   }
 
-  useEffect(() => {
-    let total = 0;
-    data.map((item) => (total += item.price));
-    setTotalPrice(total);
-  }, [data, setTotalPrice]);
+  const [{canDrop, dragItem}, drop] = useDrop(() => ({
+    accept: "NEW_INGREIENT",
+    drop: (item) => dispatch(addToConstructor(item)),
+    collect: (monitor) => ({
+      canDrop: monitor.canDrop,
+      dragItem: monitor.dragItem,
+      isOver: monitor.isOver
+    }),
+  }))
+
+  const dragBuns = canDrop && dragItem && dragItem.type === "bun";
+
+  const dragIngredients = canDrop && dragItem && dragItem.type !== "bun";
+
+  dispatch(
+    makeOrder([
+      orderedItems.bun,
+      ...orderedItems.ingredients.map((elem) => elem.id),
+      orderedItems.bun
+    ])
+  )
+
 
   return (
-    <div className={styles.BurgerConstructor}>
-      <div className={styles.BunContainerTop}>
-        {data.map((elem, i) => {
-          if (elem._id === "60d3b41abdacab0026a733c6") {
-            return <BunConstructorTop key={elem._id} itemFood={elem} />;
-          }
-        })}
-      </div>
-      <div className={styles.MiddleContainer}>
-        {data.map((elem, i) => {
-          if (
-            elem._id !== "60d3b41abdacab0026a733c6" &&
-            elem._id !== "60d3b41abdacab0026a733c7"
-          ) {
-            return <MiddleConstr key={elem._id} itemFood={elem} />;
-          }
-        })}
-      </div>
-      <div className={styles.BunContainerBottom}>
-        {data.map((elem, i) => {
-          if (elem._id === "60d3b41abdacab0026a733c6") {
-            return <BunContainerBottom key={elem._id} itemFood={elem} />;
-          }
-        })}
-      </div>
-      <OrderStateContext.Provider value={{ orderNumber, setOrderNumber }}>
+    <section className={styles.BurgerConstructor} ref={drop}>
+      {orderedItems.bun ? (
+        <div className={`${styles.TopConstructor}`}>
+        <ConstructorElement
+        type = "top"
+        isLocked={true}
+        text={orderedItems.bun.name}
+        price={orderedItems.bun.price}
+        thumbnail={orderedItems.bun.image}
+         />
+        </div>
+      ) : (
+        <div className={`${styles.notBun} ${dragBuns && styles.dragActive} ${styles.notBunsTop}`}>
+        Choose your bun
+        </div>
+      )}
+      <ul className={styles.MiddleConstructor}>
+        {orderedItems.ingredients.length > 0 ? (
+          orderedItems.ingredients.map((item, index) => {
+            return (
+              <MiddleConstr
+              ingredient={item}
+              index={index}
+              key={item.id}
+               />
+            );
+          })
+        ) : (
+          <div className={`${styles.noBuns} ${dragIngredients && styles.dragActive}`}>
+            Choose your ingredients
+          </div>
+        )
+        }
+      </ul>
+      {orderedItems.bun ? (
+        <div className={`${styles.TopConstructor}`}>
+        <ConstructorElement
+        type = "bottom"
+        isLocked={true}
+        text={orderedItems.bun.name}
+        price={orderedItems.bun.price}
+        thumbnail={orderedItems.bun.image}
+         />
+        </div>
+      ) : (
+        <div className={`${styles.notBun} ${dragBuns && styles.dragActive} ${styles.notBunsTop}`}>
+        Choose your bun
+        </div>
+      )}
         <div className={styles.BurgerPrice}>
-          <p className="text text_type_digits-medium">{totalPrice}</p>
+          <p className="text text_type_digits-medium">18730</p>
           <CurrencyIcon type="primary" />
 
           <div style={{ overflow: "hidden" }}>
             <Button
               type="primary"
               size="large"
-              onClick={() => openModalHandler()}
+              onClick={() => dispatch(getOrderNumber())}
             >
               Оформить заказ
             </Button>
           </div>
 
-          {modalIsOpen && (
+          {isOpen && (
             <Modal
               text={"Детали заказа"}
-              isOpen={openModalHandler}
+              isOpen={isOpen}
               onCancel={closeModalHandler}
             >
-              <OrderDetails currentIndredient={data} />
+              <OrderDetails />
             </Modal>
           )}
         </div>
-      </OrderStateContext.Provider>
-    </div>
+    </section>
   );
 };
+
+/*
+const [{ isHover }, dropTargerRef] = useDrop({
+    accept: 'ingredient',
+    collect: monitor => ({
+      isHover: monitor.isOver()
+    }),
+    drop(item) {
+      dispatch({
+        type: CHOOSE_INGREDIENT_SUCCESS,
+        item: {
+          ...item,
+          dragId: uuidv4(),
+        }
+      })
+    }
+  })
+      
+      useEffect(() => {
+    let total = 0;
+    ingredients.map((item) => (total += item.price));
+    setTotalPrice(total);
+  }, [ingredients, setTotalPrice]);
+*/

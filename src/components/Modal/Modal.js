@@ -4,10 +4,9 @@ import styles from "./Modal.module.css";
 import PropTypes from "prop-types";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
-import { OrderDetails } from "../OrderDetails/OrderDetails";
-import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 
 function Modal({ text, isOpen, onCancel, children }) {
+  
   useEffect(() => {
     function closeByEscape(event) {
       if (event.key === "Escape") {
@@ -41,7 +40,6 @@ function Modal({ text, isOpen, onCancel, children }) {
 
 Modal.propTypes = {
   text: PropTypes.string.isRequired,
-  isOpen: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
 };
 

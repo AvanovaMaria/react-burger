@@ -7,42 +7,61 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../Modal/Modal";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { OPEN_MODAL, CLOSE_MODAL } from "../../services/actions/modal";
+import { useDrag } from 'react-dnd';
 
 function IngredientCard({ itemFood }) {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { _id, image, price, name } = itemFood;
+  const [count, setCount] = useState();
 
-  function openModalHandler() {
-    setModalIsOpen(true);
-  }
+  const dispatch = useDispatch();
 
-  function closeModalHandler() {
-    setModalIsOpen(false);
-  }
+  const openModalHandler = () => {
+    dispatch({
+      type: OPEN_MODAL,
+      payload: itemFood,
+    });
+  };
+
+  const closeModalHandler = () => {
+    dispatch({
+      type: CLOSE_MODAL,
+    });
+  };
+
+  const { isOpen } = useSelector((state) => state.showModal);
+
+const [{opacity}, dragRef] = useDrag({
+  type: 'ingredient',
+  item: { _id },
+  collect: monitor => ({
+    opacity: monitor.isDragging() ? 0.5 : 1
+  })
+});
 
   return (
-    <div className={styles.BurgerCard}>
-      <div className={styles.BurgerImage} onClick={openModalHandler}>
-        <img src={itemFood.image} alt="yummy bun" />
-      </div>
+    <article ref={dragRef} className={styles.BurgerCard} onClick={openModalHandler} style={{ opacity }}>
+      <img src={image} alt="yummy bun" />
       <div className={styles.BurgerCount}>
-        <p className="text text_type_digits-default">{itemFood.price}</p>
+        <p className="text text_type_digits-default">{price}</p>
         <CurrencyIcon type="primary" />
       </div>
       <div className={styles.BurgerDescription}>
-        <p className="text text_type_main-default">{itemFood.name}</p>
+        <p className="text text_type_main-default">{name}</p>
       </div>
-      {modalIsOpen && (
+      {isOpen && (
         <>
           <Modal
             text={"Детали ингредиента"}
-            isOpen={openModalHandler}
+            isOpen={isOpen}
             onCancel={closeModalHandler}
           >
-            <IngredientDetails itemFood={itemFood} />
+            <IngredientDetails ingredient={itemFood} />
           </Modal>
         </>
       )}
-    </div>
+    </article>
   );
 }
 
